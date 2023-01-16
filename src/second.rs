@@ -27,7 +27,8 @@ impl List {
             elem: elem,
             // This function takes a mutable reference to the head
             // and returns the current head, replacing it with Link::Empty.
-            next: mem::replace(&mut self.head, None),
+            next: self.head.take(),
+            // mem::replace(&mut option, None) is the same as option.take()
         };
 
         self.head = Some(Box::new(new_node));
@@ -35,7 +36,7 @@ impl List {
     // pop the node, return the value, return can be empty
     pub fn pop(&mut self) -> Option<i32> {
         let result;
-        match mem::replace(&mut self.head, None) {
+        match self.head.take() {
             None => {
                 result = None;
             }
