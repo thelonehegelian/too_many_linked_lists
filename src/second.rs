@@ -14,6 +14,24 @@ pub struct Node<T> {
     next: Link<T>,
 }
 
+// a tuple struct
+pub struct IntoIter<T>(List<T>);
+
+impl<T> List<T> {
+    pub fn into_iter(self) -> IntoIter<T> {
+        IntoIter(self)
+    }
+}
+
+// implement the iterator trait
+impl<T> Iterator for IntoIter<T> {
+    type Item = T;
+    fn next(&mut self) -> Option<Self::Item> {
+        // access tuple struct and pop the value
+        self.0.pop()
+    }
+}
+
 // static method to create a new list
 impl<T> List<T> {
     pub fn new() -> Self {
@@ -98,5 +116,20 @@ mod test {
         });
         assert_eq!(list.peek(), Some(&42));
         assert_eq!(list.pop(), Some(42));
+    }
+
+    #[test]
+    fn into_iter() {
+        use super::List;
+        let mut list = List::new();
+        list.push(1);
+        list.push(2);
+        list.push(3);
+
+        let mut iter = list.into_iter();
+        assert_eq!(iter.next(), Some(3));
+        assert_eq!(iter.next(), Some(2));
+        assert_eq!(iter.next(), Some(1));
+        assert_eq!(iter.next(), None);
     }
 }
