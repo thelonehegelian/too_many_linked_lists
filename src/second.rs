@@ -45,6 +45,10 @@ impl<T> List<T> {
     fn peek(&self) -> Option<&T> {
         self.head.as_ref().map(|node| &node.elem)
     }
+    // mutable peek function
+    fn peek_mut(&mut self) -> Option<&mut T> {
+        self.head.as_mut().map(|node| &mut node.elem)
+    }
 }
 
 #[cfg(test)]
@@ -85,5 +89,10 @@ mod test {
         assert_eq!(list.peek(), Some(&3));
         list.pop();
         assert_eq!(list.peek(), Some(&2));
+
+        // test mutable peek
+        list.peek_mut().map(|value| {
+            *value = 42;
+        });
     }
 }
