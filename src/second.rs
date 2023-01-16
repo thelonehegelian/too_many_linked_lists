@@ -54,6 +54,10 @@ impl<T> List<T> {
 impl<'a, T> Iterator for IterMut<'a, T> {
     type Item = &'a mut T;
     fn next(&mut self) -> Option<Self::Item> {
+        // remind why we need to use take here? because we need to move the value out of the option
+        // and then we can replace it with the next value
+        // if we don't use take, we will get a reference to the option, and the option will not be
+        // replaced
         self.next.take().map(|node| {
             self.next = node.next.as_mut().map(|node| &mut **node);
             &mut node.elem
