@@ -91,8 +91,12 @@ mod test {
         assert_eq!(list.peek(), Some(&2));
 
         // test mutable peek
+        // &mut value does not make the value mutable, map is in fact passing the &mut i32 to the closure
+        // so there is no need to use &mut value
         list.peek_mut().map(|value| {
             *value = 42;
         });
+        assert_eq!(list.peek(), Some(&42));
+        assert_eq!(list.pop(), Some(42));
     }
 }
