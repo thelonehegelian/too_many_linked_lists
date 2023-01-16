@@ -35,18 +35,11 @@ impl List {
     }
     // pop the node, return the value, return can be empty
     pub fn pop(&mut self) -> Option<i32> {
-        let result;
-        match self.head.take() {
-            None => {
-                result = None;
-            }
-            Some(node) => {
-                // remove the head
-                result = Some(node.elem);
-                // set head to the next node
-                self.head = node.next;
-            }
-        }
-        result
+        // match option { None => None, Some(x) => Some(y) } is the same as option.map(|x| y)
+        self.head.take().map(|node| {
+            self.head = node.next;
+            node.elem
+        })
+        // result
     }
 }
