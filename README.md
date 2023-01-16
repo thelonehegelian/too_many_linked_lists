@@ -1,7 +1,7 @@
 ### TODO: 
 ---
 
-- [ ] Impl Drop in first.rs: https://rust-unofficial.github.io/too-many-lists/first-drop.html
+- [ ] Impl Drop in all: https://rust-unofficial.github.io/too-many-lists/first-drop.html
 
 
 ### Things learnt
