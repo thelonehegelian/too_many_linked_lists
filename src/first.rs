@@ -1,3 +1,6 @@
+/** Notes
+* A type has a destructor if it implements a trait called Drop.
+*/
 use std::mem;
 
 pub struct List {
