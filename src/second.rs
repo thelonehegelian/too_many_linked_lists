@@ -43,3 +43,32 @@ impl List {
         // result
     }
 }
+
+#[cfg(test)]
+mod test {
+    #[test]
+    fn basics() {
+        use super::List;
+        // create a new list
+        let mut list = List::new();
+        // assert that the list is empty
+        assert_eq!(list.pop(), None);
+        // push new values
+        list.push(1);
+        list.push(2);
+        list.push(3);
+
+        // pop the values
+        assert_eq!(list.pop(), Some(3));
+        assert_eq!(list.pop(), Some(2));
+        // push more values
+        list.push(4);
+        list.push(5);
+        // pop the values
+        assert_eq!(list.pop(), Some(5));
+        assert_eq!(list.pop(), Some(4));
+        // remove all the values
+        assert_eq!(list.pop(), Some(1));
+        assert_eq!(list.pop(), None);
+    }
+}
