@@ -2,4 +2,13 @@
 ---
 
 - [ ] Impl Drop in first.rs: https://rust-unofficial.github.io/too-many-lists/first-drop.html
-- [ ] 
+
+
+### Things learnt
+
+- A basic implementation of a linked list
+- Rust concepts used 
+  - struct
+  - enum
+  - Box: heap allocation
+  - 
