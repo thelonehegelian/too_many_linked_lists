@@ -29,4 +29,8 @@ impl<T> List<T> {
             head: self.head.as_ref().and_then(|node| node.next.clone()),
         }
     }
+    //  returns a reference to the first element
+    pub fn head(&self) -> Option<&T> {
+        self.head.as_ref().map(|node| &node.elem)
+    }
 }
