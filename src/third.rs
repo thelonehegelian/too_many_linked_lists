@@ -8,6 +8,35 @@ pub struct Node<T> {
     next: Link<T>,
 }
 
+/************
+ * ITERATORS
+ ************/
+
+pub struct Iter<'a, T> {
+    next: Option<&'a Node<T>>,
+}
+
+impl<T> List<T> {
+    pub fn iter(&self) -> Iter<'_, T> {
+        Iter {
+            next: self.head.as_deref(),
+        }
+    }
+}
+
+impl<'a, T> Iterator for Iter<'a, T> {
+    type Item = &'a T;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.next.map(|node| {
+            self.next = node.next.as_deref();
+            &node.elem
+        })
+    }
+}
+
+///////////////////////////////
+
 impl<T> List<T> {
     pub fn new() -> Self {
         List { head: None }
